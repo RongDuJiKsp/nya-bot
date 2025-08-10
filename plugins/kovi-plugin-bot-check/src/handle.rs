@@ -36,7 +36,7 @@ pub async fn on_chat(e: Arc<GroupMsgEvent>, bot: Arc<RuntimeBot>) -> Result<(), 
             BanConfig::get().kick_can_request_or_default(),
         );
         e.reply_and_quote(format!(
-            "用户{} 因为触发违禁词达到次数{} 已被踢出！！如需申诉请联系管理员",
+            "用户{} 因为触发违禁词达到次数{} 已被踢出！！如需申诉请联系管理员 (哈气)",
             e.user_id, *times
         ));
         //身死债消
@@ -52,7 +52,7 @@ pub async fn on_chat(e: Arc<GroupMsgEvent>, bot: Arc<RuntimeBot>) -> Result<(), 
             BanConfig::get().chat_shut_up_duration().as_secs() as usize,
         );
         e.reply_and_quote(format!(
-            "用户{} 因为触发违禁词达到次数{} 已被封禁{}s！如需申诉请联系管理员",
+            "用户{} 因为触发违禁词达到次数{} 已被封禁{}s！如需申诉请联系管理员 (哈气)",
             e.user_id,
             *times,
             BanConfig::get().chat_shut_up_duration().as_secs()
