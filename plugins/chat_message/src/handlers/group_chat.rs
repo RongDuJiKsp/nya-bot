@@ -13,6 +13,7 @@ use kovi_plugin_dev_utils::infoev::InfoEv;
 use std::collections::{HashMap, VecDeque};
 use std::sync::{Arc, OnceLock};
 use std::time::SystemTime;
+use kovi_plugin_dev_utils::msg::get_at_targets;
 
 pub async fn handle_group_chat(
     bot: Arc<RuntimeBot>,
@@ -26,13 +27,7 @@ pub async fn handle_group_chat(
         return Ok(());
     }
     //有人@猫娘
-    if event
-        .message
-        .get("at")
-        .iter()
-        .filter_map(|s| s.data.get("qq"))
-        .filter_map(|v| v.as_str())
-        .filter_map(|s| s.parse::<i64>().ok())
+    if get_at_targets(&event).into_iter()
         .any(|e| e == event.self_id)
     {
         at_me(event.clone()).await;

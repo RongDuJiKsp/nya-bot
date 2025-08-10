@@ -8,6 +8,7 @@ use kovi_plugin_command_exec::app::{BotCommand, BotCommandBuilder};
 use kovi_plugin_expand_napcat::NapCatApi;
 use std::collections::HashSet;
 use std::sync::Arc;
+use kovi_plugin_dev_utils::msg::get_at_targets;
 
 static NULL_STR: String = String::new();
 pub async fn handle_group_msg(e: Arc<GroupMsgEvent>, bot: Arc<RuntimeBot>) {
@@ -39,14 +40,7 @@ pub async fn handle_group_msg(e: Arc<GroupMsgEvent>, bot: Arc<RuntimeBot>) {
     }
 }
 fn get_targets(e: &BotCommand) -> Vec<i64> {
-    let mut targets = e
-        .event
-        .message
-        .get("at")
-        .iter()
-        .filter_map(|s| s.data.get("qq"))
-        .filter_map(|v| v.as_str())
-        .filter_map(|s| s.parse::<i64>().ok())
+    let mut targets = get_at_targets(&e.event).into_iter()
         .filter(|x| *x != e.event.self_id)
         .collect::<Vec<_>>();
     if e.args.len() > 1 {
