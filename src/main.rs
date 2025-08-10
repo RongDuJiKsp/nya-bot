@@ -9,5 +9,5 @@ fn main() {
         kovi_plugin_emoji_attack,
         kovi_plugin_bot_check
     )
-        .run();
+    .run();
 }

@@ -1,10 +1,10 @@
 use crate::config::ChatConfig;
 use anyhow::anyhow;
+use async_openai::Client;
 use async_openai::config::OpenAIConfig;
 use async_openai::types::{
     ChatCompletionRequestMessage, ChatCompletionRequestUserMessage, CreateChatCompletionRequestArgs,
 };
-use async_openai::Client;
 use kovi::log::{error, warn};
 
 async fn build_client() -> Client<OpenAIConfig> {
@@ -50,7 +50,7 @@ async fn single_chat(s: &str, model: &str) -> Result<String, anyhow::Error> {
         )],
         model,
     )
-        .await
+    .await
 }
 
 pub async fn get_reply_as_nya_cat(
@@ -64,5 +64,5 @@ pub async fn get_reply_as_smart_nya_cat(q: &str) -> Result<String, anyhow::Error
         &format!("{prompt}\n{q}"),
         &ChatConfig::get().model.smart_model,
     )
-        .await
+    .await
 }

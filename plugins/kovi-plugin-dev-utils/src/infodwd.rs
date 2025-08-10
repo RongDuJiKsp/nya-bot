@@ -1,4 +1,4 @@
-use kovi::{serde_json, RuntimeBot};
+use kovi::{RuntimeBot, serde_json};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 

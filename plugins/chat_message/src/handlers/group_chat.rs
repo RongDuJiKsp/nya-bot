@@ -10,10 +10,10 @@ use kovi::log::{error, info};
 use kovi::tokio::sync::RwLock;
 use kovi::{MsgEvent, RuntimeBot};
 use kovi_plugin_dev_utils::infoev::InfoEv;
+use kovi_plugin_dev_utils::msg::get_at_targets;
 use std::collections::{HashMap, VecDeque};
 use std::sync::{Arc, OnceLock};
 use std::time::SystemTime;
-use kovi_plugin_dev_utils::msg::get_at_targets;
 
 pub async fn handle_group_chat(
     bot: Arc<RuntimeBot>,
@@ -27,7 +27,8 @@ pub async fn handle_group_chat(
         return Ok(());
     }
     //有人@猫娘
-    if get_at_targets(&event).into_iter()
+    if get_at_targets(&event)
+        .into_iter()
         .any(|e| e == event.self_id)
     {
         at_me(event.clone()).await;
@@ -110,7 +111,7 @@ impl NyaCatMemory {
         while let Some((chat_time, msg)) = arr.pop_front() {
             if arr.len() < ChatConfig::get().model.role_max_message
                 && now_time - chat_time
-                < ChatConfig::get().model.role_context_expiration_time_second
+                    < ChatConfig::get().model.role_context_expiration_time_second
             {
                 arr.push_front((chat_time, msg));
                 break;

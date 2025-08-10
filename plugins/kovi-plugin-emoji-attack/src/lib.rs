@@ -1,7 +1,7 @@
 mod app;
 mod config;
-mod handle;
 mod data;
+mod handle;
 
 #[kovi::plugin]
 async fn main() {

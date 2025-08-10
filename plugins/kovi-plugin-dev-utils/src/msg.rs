@@ -1,6 +1,6 @@
 use kovi::MsgEvent;
 
-pub fn get_at_targets(e:&MsgEvent) ->Vec<i64>{
+pub fn get_at_targets(e: &MsgEvent) -> Vec<i64> {
     e.message
         .get("at")
         .iter()

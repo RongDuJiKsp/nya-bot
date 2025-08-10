@@ -61,6 +61,6 @@ async fn on_unban(c: BotCommand) {
             .or_default()
             .entry(target)
             .or_default() = 0;
-        c.bot.set_group_ban(c.event.group_id.unwrap(),target,0);
+        c.bot.set_group_ban(c.event.group_id.unwrap(), target, 0);
     }
 }

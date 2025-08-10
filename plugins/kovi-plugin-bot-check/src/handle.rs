@@ -2,7 +2,7 @@ use crate::config::BanConfig;
 use crate::data::BanData;
 use kovi::event::GroupMsgEvent;
 use kovi::log::info;
-use kovi::{serde_json, RequestEvent, RuntimeBot};
+use kovi::{RequestEvent, RuntimeBot, serde_json};
 use kovi_plugin_dev_utils::infodwd::{GroupRequestEvent, InfoDwd};
 use std::sync::Arc;
 

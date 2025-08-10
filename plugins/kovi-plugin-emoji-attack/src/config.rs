@@ -11,7 +11,7 @@ pub struct EmojiAttackConfig {
     pub emoji: Vec<String>,                //贴的emoji id
     pub wait_ms: Option<u64>,              //贴间隔时间 默认300ms
 }
-config!(EmojiAttackConfig,EMOJI_ATTACK_CONFIG);
+config!(EmojiAttackConfig, EMOJI_ATTACK_CONFIG);
 impl EmojiAttackConfig {
     pub fn wait_duration(&self) -> Duration {
         Duration::from_millis(self.wait_ms.unwrap_or(300))

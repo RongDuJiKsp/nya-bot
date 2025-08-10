@@ -1,4 +1,4 @@
-use kovi::{serde_json, MsgEvent, RuntimeBot};
+use kovi::{MsgEvent, RuntimeBot, serde_json};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -34,9 +34,9 @@ impl InfoEv {
                 event.self_id,
                 false,
             )
-                .await
-                .map_err(|e| anyhow::anyhow!("{}", e.data.to_string()))?
-                .data,
+            .await
+            .map_err(|e| anyhow::anyhow!("{}", e.data.to_string()))?
+            .data,
         )?)
     }
 }

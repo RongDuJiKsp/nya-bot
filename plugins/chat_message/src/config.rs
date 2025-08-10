@@ -1,8 +1,8 @@
 use kovi_plugin_dev_utils::config;
 use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
-use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::OnceLock;
+use std::sync::atomic::{AtomicBool, Ordering};
 
 static CHAT_CONFIG: OnceLock<ChatConfig> = OnceLock::new();
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
@@ -30,7 +30,7 @@ pub struct ChatConfig {
     pub allow_groups: HashSet<i64>,
     pub model: ChatModelCallConfig,
 }
-config!(ChatConfig,CHAT_CONFIG,"chat_config.json");
+config!(ChatConfig, CHAT_CONFIG, "chat_config.json");
 
 pub struct SyncControl;
 static LIVE: AtomicBool = AtomicBool::new(true);
