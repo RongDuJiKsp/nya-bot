@@ -1,0 +1,11 @@
+[package]
+name = "kovi-plugin-qq-tools"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+kovi.workspace = true
+kovi-plugin-dev-utils = { path = "../kovi-plugin-dev-utils" }
+kovi-plugin-command-exec = { path = "../kovi-plugin-command-exec" }
+serde = { version = "1.0.219", features = ["derive"] }
+anyhow = "1.0.98"

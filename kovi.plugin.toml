@@ -7,21 +7,12 @@ list_mode = "WhiteList"
 friends = []
 groups = []
 
-[kovi-plugin-javascript-shell]
+[chat_message]
 enable_on_startup = true
 access_control = false
 list_mode = "WhiteList"
 
-[kovi-plugin-javascript-shell.access_list]
-friends = []
-groups = []
-
-[kovi-plugin-command-exec]
-enable_on_startup = true
-access_control = false
-list_mode = "WhiteList"
-
-[kovi-plugin-command-exec.access_list]
+[chat_message.access_list]
 friends = []
 groups = []
 
@@ -34,6 +25,24 @@ list_mode = "WhiteList"
 friends = []
 groups = []
 
+[kovi-plugin-javascript-shell]
+enable_on_startup = true
+access_control = false
+list_mode = "WhiteList"
+
+[kovi-plugin-javascript-shell.access_list]
+friends = []
+groups = []
+
+[kovi-plugin-qq-tools]
+enable_on_startup = true
+access_control = false
+list_mode = "WhiteList"
+
+[kovi-plugin-qq-tools.access_list]
+friends = []
+groups = []
+
 [kovi-plugin-emoji-attack]
 enable_on_startup = true
 access_control = false
@@ -43,11 +52,11 @@ list_mode = "WhiteList"
 friends = []
 groups = []
 
-[chat_message]
+[kovi-plugin-command-exec]
 enable_on_startup = true
 access_control = false
 list_mode = "WhiteList"
 
-[chat_message.access_list]
+[kovi-plugin-command-exec.access_list]
 friends = []
 groups = []
