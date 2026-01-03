@@ -1,0 +1,10 @@
+[config]
+main_admin = 0
+admins = []
+debug = false
+
+[server]
+host = "127.0.0.1"
+port = 8081
+access_token = ""
+secure = false
