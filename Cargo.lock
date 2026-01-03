@@ -1682,6 +1682,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "kovi",
+ "kovi-plugin-command-exec",
  "kovi-plugin-dev-utils",
  "regex",
  "serde",
@@ -1755,6 +1756,17 @@ dependencies = [
  "kovi",
  "kovi-plugin-command-exec",
  "kovi-plugin-dev-utils",
+]
+
+[[package]]
+name = "kovi-plugin-qq-tools"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "kovi",
+ "kovi-plugin-command-exec",
+ "kovi-plugin-dev-utils",
+ "serde",
 ]
 
 [[package]]
@@ -2100,6 +2112,7 @@ dependencies = [
  "kovi-plugin-command-exec",
  "kovi-plugin-emoji-attack",
  "kovi-plugin-javascript-shell",
+ "kovi-plugin-qq-tools",
 ]
 
 [[package]]

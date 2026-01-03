@@ -1,6 +1,6 @@
 use crate::config::EmojiAttackConfig;
-use kovi::bot::runtimebot::RuntimeBot;
 use kovi::PluginBuilder as plugin;
+use kovi::bot::runtimebot::RuntimeBot;
 
 use crate::data::EmojiAttackData;
 use crate::handle::{handle_group_msg, register_cmd};

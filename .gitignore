@@ -1,5 +1,6 @@
 /target
 kovi.conf.toml
+kovi.plugin.toml
 /.idea
 /.vscode
 /data

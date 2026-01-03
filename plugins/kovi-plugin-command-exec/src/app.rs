@@ -1,6 +1,6 @@
 use crate::config::CommandExecConfig;
 use kovi::log::{error, info};
-use kovi::tokio::sync::{broadcast, RwLock};
+use kovi::tokio::sync::{RwLock, broadcast};
 use kovi::{MsgEvent, RuntimeBot};
 use std::collections::HashSet;
 use std::sync::{Arc, OnceLock};
@@ -93,7 +93,10 @@ impl BotCommand {
             return;
         }
         if f.super_command.contains(self.cmd.as_str()) {
-            if CommandExecConfig::get().in_super_user(self.event.as_ref(), self.bot.clone()).await {
+            if CommandExecConfig::get()
+                .in_super_user(self.event.as_ref(), self.bot.clone())
+                .await
+            {
                 self.exec_command(&f.event_bus).await;
             } else {
                 self.event.reply_and_quote("你是谁喵！我不认识你喵！哒咩！");

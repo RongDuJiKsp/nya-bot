@@ -2,7 +2,7 @@ use kovi_plugin_dev_utils::config;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use serde_with::VecSkipError;
-use serde_with::{serde_as, DisplayFromStr};
+use serde_with::{DisplayFromStr, serde_as};
 use std::cmp;
 use std::collections::HashSet;
 use std::sync::OnceLock;
@@ -36,6 +36,6 @@ impl BanConfig {
 }
 #[derive(Default, Deserialize, Serialize)]
 pub struct InviteBanConfig {
-    pub min_level: Option<i32>,    //当邀请人等级小于这个数时触发ban 
+    pub min_level: Option<i32>,    //当邀请人等级小于这个数时触发ban
     pub min_activate: Option<i32>, //当邀请人群活跃等级小于这个数时ban
 }
