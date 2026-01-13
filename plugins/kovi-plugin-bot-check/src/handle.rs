@@ -6,20 +6,7 @@ use kovi::{RequestEvent, RuntimeBot, serde_json};
 use kovi_plugin_dev_utils::infodwd::{GroupRequestEvent, InfoDwd};
 use std::sync::Arc;
 
-pub async fn on_chat(e: Arc<GroupMsgEvent>, bot: Arc<RuntimeBot>) -> Result<(), anyhow::Error> {
-    //不是我喜欢的群，直接屏蔽
-    if !BanConfig::get().enable_group.contains(&e.group_id) {
-        return Ok(());
-    }
-    //放行
-    if !BanConfig::get()
-        .chat_regex_list
-        .iter()
-        .map(|reg| reg.is_match(&e.human_text))
-        .fold(false, |p, c| p || c)
-    {
-        return Ok(());
-    }
+async fn do_ban(e: Arc<GroupMsgEvent>, bot: Arc<RuntimeBot>) {
     let ban_data = BanData::get();
     let mut ban_lock = ban_data.write().await;
     let cnt = ban_lock.chat_action_times.entry(e.group_id).or_default();
@@ -61,6 +48,23 @@ pub async fn on_chat(e: Arc<GroupMsgEvent>, bot: Arc<RuntimeBot>) -> Result<(), 
         || BanConfig::get().enable_chat_shut_up.is_some()
     {
         e.reply_and_quote("爆了")
+    }
+}
+fn hit_by_regex(e: Arc<GroupMsgEvent>) -> bool {
+    BanConfig::get()
+        .chat_regex_list
+        .iter()
+        .map(|reg| reg.is_match(&e.human_text))
+        .fold(false, |p, c| p || c)
+}
+pub async fn on_chat(e: Arc<GroupMsgEvent>, bot: Arc<RuntimeBot>) -> Result<(), anyhow::Error> {
+    //不是我喜欢的群，直接屏蔽
+    if !BanConfig::get().enable_group.contains(&e.group_id) {
+        return Ok(());
+    }
+
+    if hit_by_regex(e.clone()) {
+        do_ban(e.clone(), bot.clone()).await;
     }
 
     Ok(())
