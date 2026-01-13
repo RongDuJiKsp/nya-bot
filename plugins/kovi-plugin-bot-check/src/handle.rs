@@ -57,13 +57,22 @@ fn hit_by_regex(e: Arc<GroupMsgEvent>) -> bool {
         .map(|reg| reg.is_match(&e.human_text))
         .fold(false, |p, c| p || c)
 }
+
+async fn hit_by_llm(e: Arc<GroupMsgEvent>) -> Result<bool, anyhow::Error> {
+    // prompt endpoint apikey没设置就return
+    let prompt=match BanConfig::get().llm_hit_prompt.as_ref() { Some(prompt) => prompt,None=>return Ok(false), };
+    let endpoint=match BanConfig::get().open_api_endpoint.as_ref() { Some(endpoint) => endpoint,None=>return Ok(false), };
+    let api_key=match BanConfig::get().open_api_key.as_ref() {Some(key) => key, None=>return Ok(false),  };
+    
+    Ok(false)
+}
 pub async fn on_chat(e: Arc<GroupMsgEvent>, bot: Arc<RuntimeBot>) -> Result<(), anyhow::Error> {
     //不是我喜欢的群，直接屏蔽
     if !BanConfig::get().enable_group.contains(&e.group_id) {
         return Ok(());
     }
 
-    if hit_by_regex(e.clone()) {
+    if hit_by_regex(e.clone()) || hit_by_llm(e.clone()).await? { //一定先regex再llm
         do_ban(e.clone(), bot.clone()).await;
     }
 
